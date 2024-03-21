@@ -2,13 +2,7 @@ import React, { useState } from "react";
 
 function App() {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        paddingTop: 20,
-      }}
-    >
+    <div className="flex justify-center pt-20">
       <ValidatedForm />
     </div>
   );
@@ -43,7 +37,6 @@ const ValidatedForm = () => {
       setMessage(`Hoş geldiniz, ${username}!`);
       setUsername("");
       setPassword("");
-      setMessage("");
       return;
     }
 
@@ -62,6 +55,11 @@ const ValidatedForm = () => {
     setPassword(e.target.value);
     setMessage("");
   };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  };
 
   return (
     <form
@@ -74,12 +72,14 @@ const ValidatedForm = () => {
         value={username}
         type="text"
         onChange={handleUsernameChange}
+        onKeyDown={handleKeyDown}
         className="mb-2 p-2 border"
       />
       <input
         value={password}
         type="password"
         onChange={handlePasswordChange}
+        onKeyDown={handleKeyDown}
         className="mb-4 p-2 border"
       />
       <button
